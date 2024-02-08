@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class catalog="automoviles" name="hibernate.Coche" table="coche">
+  <id name="id" type="int">
+   <column name="id"/>
+   <generator class="identity"/>
+  </id>
+  <property generated="never" lazy="false" name="marca" type="string">
+   <column length="45" name="marca"/>
+  </property>
+  <property generated="never" lazy="false" name="antiguedad" type="int">
+   <column name="antiguedad"/>
+  </property>
+  <property generated="never" lazy="false" name="precio" type="int">
+   <column name="precio"/>
+  </property>
+  <many-to-one class="hibernate.Concesionario" fetch="select"
+   lazy="false" name="concesionario">
+   <column name="id_concesionario" not-null="true"/>
+  </many-to-one>
+  <one-to-one access="field" cascade="remove" class="hibernate.Deportivo" name="deportivo"/>
+ </class>
+</hibernate-mapping>

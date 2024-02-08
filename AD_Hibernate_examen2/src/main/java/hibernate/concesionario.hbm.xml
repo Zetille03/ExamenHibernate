@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="hibernate.Concesionario" table="concesionario" catalog="automoviles">
+		<id name="id" type="int">
+			<column name="id"/>
+			<generator class="identity"/>
+		</id>
+		<property name="nombre" type="string">
+			<column name="nombre" length="45"/>
+		</property>
+		<set name="coches" table="coche" cascade="remove" fetch="select" inverse="true" lazy="false">
+			<key>
+				<column name="id_concesionario" not-null="true"/>
+			</key>
+			<one-to-many class="hibernate.Coche"/>
+		</set>
+		<set name="proveedores" table="proveedor_concesionario" cascade="remove" fetch="select" inverse="false" lazy="false">
+			<key>
+				<column name="id_concesionario" not-null="true"/>
+			</key>
+			<many-to-many entity-name="hibernate.Proveedor">
+				<column name="id_proveedor"/>
+			</many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
